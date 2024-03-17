@@ -1,0 +1,28 @@
+.row.g-5
+{
+  max-width: 1000px;
+}
+
+.img-cart
+{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  max-width:400px;
+  max-height:200px;
+}
+.qty-input{
+  min-width: 100px;
+  max-width: 150px;
+}
+table tr td{
+  border:1px solid #FFFFFF;
+}
+
+table tr th {
+  background:#eee;
+}
+
+.panel-shadow {
+  box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+}
