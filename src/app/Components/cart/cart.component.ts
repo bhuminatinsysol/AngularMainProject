@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartManagementService } from 'src/app/Services/cart-management.service';
 import { Product } from '../show-products/show-products.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -8,13 +9,9 @@ import { Product } from '../show-products/show-products.component';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent {
-  constructor(private cart: CartManagementService)
-  {
-
-  }
+  constructor(private cart: CartManagementService){}
   cartList: Product[] = [];
-
-  cartObs: any;
+  cartObs!: Subscription;
   shippingCharge:number = 20;
 
   ngOnInit() {

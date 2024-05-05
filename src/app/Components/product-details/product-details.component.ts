@@ -1,8 +1,9 @@
 import { Product } from './../show-products/show-products.component';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/Services/api.service';
+import { CartManagementService } from 'src/app/Services/cart-management.service';
 
 @Component({
   selector: 'app-product-details',
@@ -12,42 +13,37 @@ import { ApiService } from 'src/app/Services/api.service';
 export class ProductDetailsComponent {
   router = inject(Router);
   routes = inject(ActivatedRoute);
-  prodList: Product[] = [];
   selected_pid!: number;
-  api = inject( ApiService);
 
-  selectedProduct!: Product | null;
+  selectedPhoto!: string;
+  constructor(private api: ApiService, private cart:CartManagementService){}
+
+  selectedProduct!: Product;
 
   getDataObsProd !: Subscription;
 
   ngOnInit(): void {
-
-    this.getDataObsProd = this.api.getData().subscribe(
-      {
-        next: (data: any) => {
-          this.prodList = data;
-          this.selectProduct();
-        }, error(err) {
-
-        },
-        complete() {
-        }
-      });
-
-
     this.routes.paramMap.subscribe((params: any) => {
       this.selected_pid = params.get("id");
     });
 
+    this.getDataObsProd = this.api.getSingleProduct(this.selected_pid).subscribe((data:Product)=>{
+      let prod = data;
+      prod.quantity = 1;
+      this.selectedProduct = data;
+      this.selectedPhoto = prod.thumbnail;
+      console.log("selected Product: ", this.selectedProduct);
+    });
   }
 
+  changePhoto(photo: string): void
+  {
+    this.selectedPhoto = photo;
+    console.log("selected Photo: "+ this.selectedPhoto);
+  }
 
-  selectProduct(): void {
-    console.log("In select Product: ", this.prodList);
-    this.selectedProduct = this.prodList.filter((prod: Product) => {
-      return prod.id == this.selected_pid;
-    })[0];
-    console.log("selected Product: ", this.selectedProduct);
+  BuyProduct(item:Product):void{
+    this.cart.addProduct(item);
   }
 
   ngOnDestroy(): void {
@@ -55,4 +51,5 @@ export class ProductDetailsComponent {
     this.getDataObsProd.unsubscribe();
     console.log("Product details observer unsubscribe");
   }
+
 }

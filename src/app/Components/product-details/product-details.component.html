@@ -1,53 +1,55 @@
 <div class="card pt-5 mt-3">
   <div class="container-fliud">
     <div class="wrapper row">
-      <div class="preview col-md-6">
-
-        <div class="preview-pic tab-content">
-          <div class="tab-pane active" id="pic-0"><img src="{{selectedProduct?.thumbnail}}"/></div>
-          <ng-container *ngFor="let img of selectedProduct?.images, let e =index">
-          <div class="tab-pane" id="pic-{{e+1}}"><img src="{{img}}" /></div>
-        </ng-container>
-        </div>
-        <ul class="preview-thumbnail nav nav-tabs">
-          <li class="active"><a data-target="#pic-0" data-toggle="tab"><img src="{{selectedProduct?.thumbnail}}" /></a></li>
-          <ng-container *ngFor="let img of selectedProduct?.images, let e =index" >
-          <li><a data-target="#pic-{{e+1}}" data-toggle="tab"><img src="{{img}}" /></a></li>
-        </ng-container>
-        </ul>
-
-      </div>
-      <div class="details col-md-6">
-        <h3 class="product-title">{{selectedProduct?.title}}</h3>
-        <div class="rating">
-          <div class="stars">
-            <span class="fa fa-star" [ngClass]="selectedProduct?.rating>0?'checked':''"></span>
-            <span class="fa fa-star" [ngClass]="selectedProduct?.rating>1?'checked':''"></span>
-            <span class="fa fa-star" [ngClass]="selectedProduct?.rating>2?'checked':''"></span>
-            <span class="fa fa-star" [ngClass]="selectedProduct?.rating>3?'checked':''"></span>
-            <span class="fa fa-star" [ngClass]="selectedProduct?.rating>4.5?'checked':''"></span>
+      <ng-container *ngIf="selectedProduct">
+        <div class="preview col-md-6">
+          <div class="preview-pic tab-content">
+            <div class="tab-pane active" id="pic-0"><img src="{{selectedPhoto}}"/></div>
+            <!-- <ng-container *ngFor="let img of selectedProduct?.images, let e =index">
+              <div class="tab-pane" id="pic-{{e+1}}"><img src="{{img}}" /></div>
+            </ng-container> -->
           </div>
-          <span class="review-no">{{selectedProduct?.rating*100 | number}} reviews</span>
+          <ul class="preview-thumbnail nav nav-tabs">
+            <!-- <li class="active"><a data-target="#pic-0" data-toggle="tab"><img src="{{selectedProduct.thumbnail}}" /></a>
+            </li> -->
+            <ng-container *ngFor="let img of selectedProduct?.images, let e =index">
+              <li><a data-target="#pic-{{e+1}}" data-toggle="tab" (click)="changePhoto(img)"><img src="{{img}}" /></a></li>
+            </ng-container>
+          </ul>
         </div>
-        <p class="product-description">{{selectedProduct?.description}}</p>
-        <h4 class="price">current price: <span>{{selectedProduct?.price | currency:'USD'}}</span></h4>
-        <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-        <h5 class="sizes">sizes:
-          <span class="size" data-toggle="tooltip" title="small">s</span>
-          <span class="size" data-toggle="tooltip" title="medium">m</span>
-          <span class="size" data-toggle="tooltip" title="large">l</span>
-          <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-        </h5>
-        <h5 class="colors">colors:
-          <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-          <span class="color green"></span>
-          <span class="color blue"></span>
-        </h5>
-        <div class="action d-flex gap-2">
-          <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-          <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+        <div class="details col-md-6">
+          <h3 class="product-title">{{selectedProduct.title}}</h3>
+          <div class="rating">
+            <div class="stars">
+              <span class="fa fa-star" [ngClass]="selectedProduct.rating>0?'checked':''"></span>
+              <span class="fa fa-star" [ngClass]="selectedProduct.rating>1?'checked':''"></span>
+              <span class="fa fa-star" [ngClass]="selectedProduct.rating>2?'checked':''"></span>
+              <span class="fa fa-star" [ngClass]="selectedProduct.rating>3?'checked':''"></span>
+              <span class="fa fa-star" [ngClass]="selectedProduct.rating>4.5?'checked':''"></span>
+            </div>
+            <span class="review-no">{{selectedProduct.rating*100 | number}} reviews</span>
+          </div>
+          <p class="product-description">{{selectedProduct.description}}</p>
+          <h4 class="price">current price: <span>{{selectedProduct.price | currency:'USD'}}</span></h4>
+          <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+          <h5 class="sizes">sizes:
+            <span class="size" data-toggle="tooltip" title="small">s</span>
+            <span class="size" data-toggle="tooltip" title="medium">m</span>
+            <span class="size" data-toggle="tooltip" title="large">l</span>
+            <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
+          </h5>
+          <h5 class="colors">colors:
+            <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
+            <span class="color green"></span>
+            <span class="color blue"></span>
+          </h5>
+          <div class="action d-flex gap-2">
+            <button class="add-to-cart btn btn-default" type="button" (click)="BuyProduct(selectedProduct)">add to
+              cart</button>
+            <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>

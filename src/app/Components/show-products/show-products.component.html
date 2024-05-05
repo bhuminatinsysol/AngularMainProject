@@ -1,7 +1,7 @@
 <div class="card-top container-fluid pt-5 mt-3">
   <div class="container d-flex justify-content-start gap-3 flex-wrap align-items-center">
     <div class="item">
-      <a (click)="filter('')" [class]="'d-flex flex-column align-items-center text-decoration-none'">
+      <a (click)="AllCategory()" [class]="'d-flex flex-column align-items-center text-decoration-none'">
         <img src="https://rukminim1.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png?q=100" alt="">
         <h6>All products</h6>
       </a>
@@ -54,7 +54,7 @@
 <div class="album py-5 bg-light">
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <ng-container *ngFor="let i of FilteredProductList | filterProducts:filterText">
+      <ng-container *ngFor="let i of productList | filterProducts:filterText">
         <div class="col">
           <div class="card shadow-sm">
             <div class="p-3">
@@ -63,7 +63,7 @@
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center">
                 <h5 class="prod_heading">{{i.title | titlecase}}</h5>
-                <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{color:'red'}"></i>
+                <i class="fa fa-heart"  [ngStyle]="checkWishList(i.id)? {color:'red'}: {color:''}" (click)="addOrRemoveWishList(i.id)"></i>
               </div>
               <p class="card-text">{{i.description}}</p>
               <div>
@@ -91,4 +91,19 @@
       </ng-container>
     </div>
   </div>
+</div>
+
+
+<div class="d-flex justify-content-center">
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="skipValue==0?'disabled':''">
+      <button class="page-link" (click)="SkipValueUpdate()">Previous</button>
+    </li>
+    <ng-container *ngFor="let e of paginationArray; let i = index;">
+      <li class="page-item"><a class="page-link" [ngClass]="skipValue == e? 'active':''" (click)="openpage(e)">{{i+1}}</a></li>
+    </ng-container>
+    <li class="page-item " [ngClass]="skipValue==actualLength-10 || actualLength < 10 ?'disabled':''">
+      <button class="page-link" (click)="limitValueUpdate()">Next</button>
+    </li>
+  </ul>
 </div>

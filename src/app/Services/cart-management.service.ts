@@ -13,7 +13,6 @@ export class CartManagementService {
 
   productObs = new BehaviorSubject<Product[]>([]);
 
-  searchObs = new BehaviorSubject<string>('');
 
   addProduct(product: Product): void {
     this.CartList.push(product);

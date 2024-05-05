@@ -12,6 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './Components/product-details/product-details.component';
 import { FormsModule } from '@angular/forms';
+import { WishListComponent } from './Components/wish-list/wish-list.component';
+import { LoginComponent } from './Components/login/login.component';
+import { SignupComponent } from './Components/signup/signup.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +24,11 @@ import { FormsModule } from '@angular/forms';
     ShowProductsComponent,
     CartComponent,
     FilterProductsPipe,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    WishListComponent,
+    LoginComponent,
+    SignupComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

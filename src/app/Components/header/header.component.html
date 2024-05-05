@@ -8,36 +8,23 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active " aria-current="page" [routerLink]="''">Home</a>
+          <a class="nav-link" aria-current="page" [routerLink]="''">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle " role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+        <li class="nav-item ms-3" >
+          <a [routerLink]="'Cart'" >
+            <i class="bi bi-cart4" style="font-size: 25px;"></i>
           </a>
-          <ul class="dropdown-menu ">
-            <li><a class="dropdown-item">Action</a></li>
-            <li><a class="dropdown-item">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <button [routerLink]="'Cart'">
-            <i class="bi bi-cart4"></i>
-          </button>
-          <ng-container *ngIf="cartList.length>0">
-          <span class="badge text-bg-danger">{{cartList.length}}</span></ng-container>
+          <ng-container *ngIf="cartListLength>0">
+          <span class="badge text-bg-danger">{{cartListLength}}</span></ng-container>
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" (input)="searchFun($event)">
-        <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
       <div class="ms-2">
-        <a><strong>Wishlist</strong> <img src="../../../assets/wishlist.png" width ="40px" height="35px" alt=""></a>
+        <a [routerLink]="'WishList'" class="text-decoration-none"><strong>Wishlist</strong> <img src="../../../assets/wishlist.png" width ="40px" height="35px" alt=""></a>
+        <ng-container *ngIf="wishlistLength>0">
+        <span class="badge text-bg-danger">{{wishlistLength}}</span></ng-container>
       </div>
     </div>
   </div>

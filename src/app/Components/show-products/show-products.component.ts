@@ -1,8 +1,9 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/Services/api.service';
 import { CartManagementService } from 'src/app/Services/cart-management.service';
+import { WishListService } from 'src/app/Services/wish-list.service';
 
 @Component({
   selector: 'app-show-products',
@@ -10,32 +11,77 @@ import { CartManagementService } from 'src/app/Services/cart-management.service'
   styleUrls: ['./show-products.component.scss']
 })
 export class ShowProductsComponent {
-
   filterText: string='';
   productList: Product[] = [];
-  FilteredProductList: Product[] = [];
 
+  paginationArray: number[] = [];
   getDataObs!:Subscription;
 
   router = inject(Router);
 
-  api = inject(ApiService);
+  constructor(private api: ApiService, private cart:CartManagementService, private wishlist: WishListService){}
 
-  cart = inject(CartManagementService);
   filterSearchText : string = "";
 
+  skipValue:number = 0;
+  limitValue: number = 10;
+
+  actualLength:number = 0;
+
   ngOnInit(): void {
-    this.getDataObs = this.api.getData().subscribe((data:any) => {
+    this.updateProductList();
+    this.getDataObs = this.api.finalProdctList.subscribe((data:Product[]) => {
       this.productList = data;
-      this.FilteredProductList= this.productList;
+      this.actualLength = this.api.lengthOfDdata;
+      this.paginationArray = [];
+      for(let i = 0; i < this.actualLength; i+=10)
+        {
+          this.paginationArray.push(i);
+        }
     });
-
-    this.cart.searchObs.subscribe((data:string) => {
-      this.filterText = data;
-    });
-
   }
 
+  addOrRemoveWishList(id:number): void {
+    this.wishlist.addToWishList(id);
+  }
+
+  checkWishList(id:number): boolean{
+    return this.wishlist.checkProductInWishList(id);
+  }
+
+  SkipValueUpdate(): void
+  {
+    if(this.skipValue != 0)
+      {
+        console.log("Skip Value: " + this.skipValue);
+        this.skipValue -= 10;
+        this.updateProductList();
+      }
+  }
+
+  limitValueUpdate(): void {
+    if(this.skipValue < 90)
+      {
+        console.log("limit value: " + this.limitValue)
+        this.skipValue += 10;
+        this.updateProductList();
+      }
+  }
+  openpage(i:number): void
+  {
+    this.skipValue = i;
+    this.updateProductList();
+  }
+  AllCategory(): void
+  {
+    this.skipValue = 0;
+    this.updateProductList();
+  }
+
+  updateProductList(): void
+  {
+    this.api.getData(this.skipValue,this.limitValue);
+  }
 
 
   BuyProduct(item:Product):void{
@@ -44,14 +90,7 @@ export class ShowProductsComponent {
 
   filter(x:string):void
   {
-    this.filterSearchText = x;
-    this.FilteredProductList= this.productList;
-    if(x != '')
-    {
-      this.FilteredProductList = this.FilteredProductList.filter((item:Product) =>{
-      return item.category === x;
-      });
-    }
+    this.api.getCategorizedProducts(x);
   }
 
   ShowProduct(item:Product):void{
@@ -60,9 +99,7 @@ export class ShowProductsComponent {
 
   ngOnDestroy():void
   {
-    console.log("showProduct destroyed");
     this.getDataObs.unsubscribe();
-    console.log("showProduct getData observable unsubscribed");
   }
 
 }
