@@ -67,4 +67,8 @@ export class ApiService {
   {
     return this.http.get<Product>("https://dummyjson.com/products/" + prdId);
   }
+
+  getAllCategories(): Observable<string[]>{
+    return this.http.get<string[]>("https://dummyjson.com/products/categories");
+  }
 }

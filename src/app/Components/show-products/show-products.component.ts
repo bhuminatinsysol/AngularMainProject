@@ -25,7 +25,7 @@ export class ShowProductsComponent {
 
   skipValue:number = 0;
   limitValue: number = 10;
-
+  productCategories: string[] = [];
   actualLength:number = 0;
 
   ngOnInit(): void {
@@ -39,6 +39,7 @@ export class ShowProductsComponent {
           this.paginationArray.push(i);
         }
     });
+    this.getAllCategories();
   }
 
   addOrRemoveWishList(id:number): void {
@@ -94,7 +95,13 @@ export class ShowProductsComponent {
   }
 
   ShowProduct(item:Product):void{
-    this.router.navigateByUrl("ProdDetails/"+item.id);
+    this.router.navigateByUrl("/home/ProdDetails/"+item.id);
+  }
+
+  getAllCategories(): void{
+    this.api.getAllCategories().subscribe((data:string[])=> {
+      this.productCategories = data;
+    })
   }
 
   ngOnDestroy():void

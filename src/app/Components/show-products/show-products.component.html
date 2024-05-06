@@ -1,109 +1,78 @@
+<div>
+  <app-carousel></app-carousel>
+</div>
+
+
 <div class="card-top container-fluid pt-5 mt-3">
-  <div class="container d-flex justify-content-start gap-3 flex-wrap align-items-center">
-    <div class="item">
-      <a (click)="AllCategory()" [class]="'d-flex flex-column align-items-center text-decoration-none'">
-        <img src="https://rukminim1.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png?q=100" alt="">
-        <h6>All products</h6>
-      </a>
-    </div>
-    <div class="item">
-      <a (click)="filter('smartphones')" [class]="'d-flex flex-column align-items-center text-decoration-none'">
-        <img src="https://pngimg.com/uploads/smartphone/smartphone_PNG8494.png" alt="">
-        <h6>Smart Phones</h6>
-      </a>
-    </div>
-    <div class="item">
-      <a (click)="filter('laptops')" [class]="'d-flex flex-column align-items-center text-decoration-none'">
-        <img src="https://pngimg.com/uploads/laptop/laptop_PNG101768.png" alt="">
-        <h6>Laptops</h6>
-      </a>
-    </div>
-    <div class="item">
-      <a (click)="filter('fragrances')" [class]="'d-flex flex-column align-items-center text-decoration-none'">
-        <img src="https://pngimg.com/uploads/perfume/perfume_PNG10242.png" alt="">
-        <h6>Fragrances</h6>
-      </a>
-    </div>
-    <div class="item">
-      <a (click)="filter('skincare')" [class]="'d-flex flex-column align-items-center text-decoration-none'">
-        <img
-          src="https://e7.pngegg.com/pngimages/616/698/png-clipart-lotion-moisturizer-facial-cream-face-face-cream-face.png"
-          alt="">
-        <h6>Skin Care</h6>
-      </a>
-    </div>
-    <div class="item">
-      <a (click)="filter('groceries')" [class]="'d-flex flex-column align-items-center text-decoration-none'">
-        <img
-          src="https://e7.pngegg.com/pngimages/74/72/png-clipart-grocery-store-kabul-farms-supermarket-food-online-grocer-grocery-food-food-supermarket.png"
-          alt="">
-        <h6>Groceries</h6>
-      </a>
-    </div>
-    <div class="item">
-      <a (click)="filter('home-decoration')" [class]="'d-flex flex-column align-items-center text-decoration-none'">
-        <img
-          src="https://e7.pngegg.com/pngimages/908/51/png-clipart-house-painter-and-decorator-material-interior-design-services-furniture-home-improvement-home-soft-home-angle-textile.png"
-          alt="">
-        <h6 class="text-center">Home Decoration</h6>
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="album py-5 bg-light">
-  <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <ng-container *ngFor="let i of productList | filterProducts:filterText">
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="p-3">
-              <img src="{{i.thumbnail}}" alt="" width="100%" height="200px">
-            </div>
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center">
-                <h5 class="prod_heading">{{i.title | titlecase}}</h5>
-                <i class="fa fa-heart"  [ngStyle]="checkWishList(i.id)? {color:'red'}: {color:''}" (click)="addOrRemoveWishList(i.id)"></i>
-              </div>
-              <p class="card-text">{{i.description}}</p>
-              <div>
-                <span class="heading">User Rating :</span>
-                <span class="fa fa-star" [ngClass]="i.rating>0?'checked':''"></span>
-                <span class="fa fa-star" [ngClass]="i.rating>1?'checked':''"></span>
-                <span class="fa fa-star" [ngClass]="i.rating>2?'checked':''"></span>
-                <span class="fa fa-star" [ngClass]="i.rating>3?'checked':''"></span>
-                <span class="fa fa-star" [ngClass]="i.rating>4.5?'checked':''"></span>
-                <p>{{i.rating}} average</p>
-              </div>
-              <div>
-                <h5 class="fw-bold">{{i.price | currency:'USD'}}</h5>
-              </div>
-              <div class="pt-2 d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-primary" (click)="BuyProduct(i)">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-success" (click)="ShowProduct(i)">Details</button>
-                </div>
-                <small class="text-muted">Stock: {{i.stock}}</small>
-              </div>
-            </div>
-          </div>
+  <div class="d-flex">
+    <div class="d-flex justify-content-start gap-3 flex-wrap align-items-center p-5">
+      <div class="d-flex flex-column align-self-start justify-content-center">
+        <h5>Category</h5>
+        <div>
+          <h6 (click)="AllCategory()" class="text-nowrap">All Categories</h6>
+          <ng-container *ngFor="let category of productCategories">
+          <h6 (click)="filter(category)" class="text-nowrap">{{category}}</h6>
+          </ng-container>
         </div>
-      </ng-container>
+      </div>
+    </div>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <ng-container *ngFor="let i of productList | filterProducts:filterText">
+            <div class="col">
+              <div class="card shadow-sm">
+                <div class="p-3">
+                  <img src="{{i.thumbnail}}" alt="" width="100%" height="200px">
+                </div>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="prod_heading">{{i.title | titlecase}}</h5>
+                    <i class="fa fa-heart" [ngStyle]="checkWishList(i.id)? {color:'red'}: {color:''}"
+                      (click)="addOrRemoveWishList(i.id)"></i>
+                  </div>
+                  <p class="card-text">{{i.description}}</p>
+                  <div>
+                    <span class="heading">User Rating :</span>
+                    <span class="fa fa-star" [ngClass]="i.rating>0?'checked':''"></span>
+                    <span class="fa fa-star" [ngClass]="i.rating>1?'checked':''"></span>
+                    <span class="fa fa-star" [ngClass]="i.rating>2?'checked':''"></span>
+                    <span class="fa fa-star" [ngClass]="i.rating>3?'checked':''"></span>
+                    <span class="fa fa-star" [ngClass]="i.rating>4.5?'checked':''"></span>
+                    <p>{{i.rating}} average</p>
+                  </div>
+                  <div>
+                    <h5 class="fw-bold">{{i.price | currency:'USD'}}</h5>
+                  </div>
+                  <div class="pt-2 d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-primary" (click)="BuyProduct(i)">Buy</button>
+                      <button type="button" class="btn btn-sm btn-outline-success"
+                        (click)="ShowProduct(i)">Details</button>
+                    </div>
+                    <small class="text-muted">Stock: {{i.stock}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-
-<div class="d-flex justify-content-center">
-  <ul class="pagination">
-    <li class="page-item" [ngClass]="skipValue==0?'disabled':''">
-      <button class="page-link" (click)="SkipValueUpdate()">Previous</button>
-    </li>
-    <ng-container *ngFor="let e of paginationArray; let i = index;">
-      <li class="page-item"><a class="page-link" [ngClass]="skipValue == e? 'active':''" (click)="openpage(e)">{{i+1}}</a></li>
-    </ng-container>
-    <li class="page-item " [ngClass]="skipValue==actualLength-10 || actualLength < 10 ?'disabled':''">
-      <button class="page-link" (click)="limitValueUpdate()">Next</button>
-    </li>
-  </ul>
-</div>
+  <div class="d-flex justify-content-center p-5">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="skipValue==0?'disabled':''">
+        <button class="page-link" (click)="SkipValueUpdate()">Previous</button>
+      </li>
+      <ng-container *ngFor="let e of paginationArray; let i = index;">
+        <li class="page-item"><a class="page-link" [ngClass]="skipValue == e? 'active':''"
+            (click)="openpage(e)">{{i+1}}</a></li>
+      </ng-container>
+      <li class="page-item " [ngClass]="skipValue==actualLength-10 || actualLength < 10 ?'disabled':''">
+        <button class="page-link" (click)="limitValueUpdate()">Next</button>
+      </li>
+    </ul>
+  </div>

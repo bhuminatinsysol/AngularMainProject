@@ -16,6 +16,8 @@ import { WishListComponent } from './Components/wish-list/wish-list.component';
 import { LoginComponent } from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { ProfileComponent } from './Components/profile/profile.component';
+import { HomeComponent } from './Components/home/home.component';
+import { CarouselComponent } from './Components/carousel/carousel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,9 @@ import { ProfileComponent } from './Components/profile/profile.component';
     WishListComponent,
     LoginComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
+    HomeComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

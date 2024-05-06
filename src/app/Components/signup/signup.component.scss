@@ -1,0 +1,29 @@
+@media screen and (min-width:600px) {
+  .mnt::before{
+    position: absolute;
+    content: "";
+    top:200px;
+    right:250px;
+    width: 1000px;
+    height: 500px;
+    transform: rotate(100deg);
+    background-image: url("https://abhishekjha.me/rip.f6d7c4dd.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 22;
+  }
+  .mnt{
+    display: flex;
+  }
+}
+
+h1{
+  font-size: 60px;
+  text-align: start;
+  font-style: 'Arial';
+}
+
+
+.mainLogin{
+  background-color: #F2F2F2;
+}
