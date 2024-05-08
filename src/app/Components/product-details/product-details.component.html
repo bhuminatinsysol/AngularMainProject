@@ -1,17 +1,12 @@
-<div class="card pt-5 mt-3">
+<div class="card pt-5 mt-3 mainContainer" id="mainCon">
   <div class="container-fliud">
     <div class="wrapper row">
       <ng-container *ngIf="selectedProduct">
         <div class="preview col-md-6">
           <div class="preview-pic tab-content">
-            <div class="tab-pane active" id="pic-0"><img src="{{selectedPhoto}}"/></div>
-            <!-- <ng-container *ngFor="let img of selectedProduct?.images, let e =index">
-              <div class="tab-pane" id="pic-{{e+1}}"><img src="{{img}}" /></div>
-            </ng-container> -->
+            <div class="tab-pane active d-flex justify-content-center" id="pic-0"><img src="{{selectedPhoto}}"/></div>
           </div>
           <ul class="preview-thumbnail nav nav-tabs">
-            <!-- <li class="active"><a data-target="#pic-0" data-toggle="tab"><img src="{{selectedProduct.thumbnail}}" /></a>
-            </li> -->
             <ng-container *ngFor="let img of selectedProduct?.images, let e =index">
               <li><a data-target="#pic-{{e+1}}" data-toggle="tab" (click)="changePhoto(img)"><img src="{{img}}" /></a></li>
             </ng-container>
@@ -39,7 +34,7 @@
             <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
           </h5>
           <h5>colors:
-            <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
+            <span class="color orange" data-toggle="tooltip" title="Not In store"></span>
             <span class="color green"></span>
             <span class="color blue"></span>
           </h5>

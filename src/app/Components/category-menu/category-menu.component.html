@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-start gap-3 flex-wrap align-items-center py-5 px-3">
+  <div class="d-flex flex-column align-self-start justify-content-center">
+    <h4 class="fw-bold">Category</h4>
+    <div>
+      <h6 (click)="AllCategory()" class="text-nowrap"></h6>
+
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header text-nowrap" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+              aria-expanded="true" aria-controls="collapseOne">
+              All Categories
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show mb-2" aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <h6 (click)="AllCategory()" class="text-nowrap border-bottom p-1 border-1">All Categories</h6>
+              <ng-container *ngFor="let category of productCategories.general">
+                <h6 (click)="filter(category)" class="text-nowrap border-bottom p-1 border-1">{{category | titlecase}}</h6>
+              </ng-container>
+              <div class="accordion mb-2" id="accordionExample2">
+                <div class="accordion-item">
+                  <h2 class="accordion-header text-nowrap" id="headingtwo">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                      Men
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingtwo"
+                    data-bs-parent="#accordionExample2">
+                    <div class="accordion-body">
+                      <ng-container *ngFor="let category of productCategories.men">
+                        <h6 (click)="filter(category)" class="text-nowrap border-bottom p-1 border-1">{{category | titlecase}}</h6>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion" id="accordionExample3">
+                <div class="accordion-item">
+                  <h2 class="accordion-header text-nowrap" id="headingthree">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                      Women
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingthree"
+                    data-bs-parent="#accordionExample3">
+                    <div class="accordion-body">
+                      <ng-container *ngFor="let category of productCategories.women">
+                        <h6 (click)="filter(category)" class="text-nowrap border-bottom p-1 border-1">{{category | titlecase}}</h6>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

@@ -32,14 +32,17 @@ export class ProductDetailsComponent {
       prod.quantity = 1;
       this.selectedProduct = data;
       this.selectedPhoto = prod.thumbnail;
-      console.log("selected Product: ", this.selectedProduct);
     });
+  }
+
+  ngAfterViewInit(): void {
+    console.log("Product selected");
+    setTimeout(()=>{ document.getElementById("mainheader")?.scrollIntoView({behavior:'smooth'})},500);
   }
 
   changePhoto(photo: string): void
   {
     this.selectedPhoto = photo;
-    console.log("selected Photo: "+ this.selectedPhoto);
   }
 
   BuyProduct(item:Product):void{
@@ -47,9 +50,7 @@ export class ProductDetailsComponent {
   }
 
   ngOnDestroy(): void {
-    console.log("product details destroy");
     this.getDataObsProd.unsubscribe();
-    console.log("Product details observer unsubscribe");
   }
 
 }

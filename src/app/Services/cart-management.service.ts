@@ -15,7 +15,14 @@ export class CartManagementService {
 
 
   addProduct(product: Product): void {
-    this.CartList.push(product);
+    let index =  this.checkProduct(product);
+    if(index != -1)
+      {
+        this.CartList[index].quantity += 1;
+      }
+      else{
+        this.CartList.push(product);
+      }
     this.productObs.next(this.CartList);
   }
 
@@ -29,7 +36,9 @@ export class CartManagementService {
     this.productObs.next(this.CartList);
   }
 
-
+  checkProduct(product: Product): number{
+    return this.CartList.findIndex((p)=> p.id === product.id);
+  }
 
 
 

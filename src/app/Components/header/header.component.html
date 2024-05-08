@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-light p-0">
+<nav class="navbar navbar-expand-md bg-light p-0" id="mainheader">
   <div class="container-fluid">
     <a class="navbar-brand text-warning" [routerLink]="''"><img src="../../../assets/B_Logo.jpg" alt="" width="50px"
         height="50px">Bigkart</a>
@@ -6,45 +6,44 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link fw-bold" aria-current="page" [routerLink]="''">Home</a>
+      <ul class="navbar-nav align-items-center justify-content-between gap-3 w-100 py-3 py-md-0">
+        <li class="nav-item d-flex">
+          <a class="nav-link fw-bold text-black" aria-current="page" [routerLink]="''">Home</a>
+          <div class="ms-2 d-flex">
+            <a [routerLink]="'Cart'" class="nav-link text-black text-decoration-none fw-bold">
+              Cart
+            </a>
+            <i class="bi bi-cart4" style="font-size: 25px;"></i>
+            <ng-container *ngIf="cartListLength>0">
+              <span class="badge text-bg-danger" style="height: 20px;">{{cartListLength}}</span></ng-container>
+          </div>
         </li>
-        <li class="nav-item ms-3">
-          <a [routerLink]="'Cart'">
-            <i class="bi bi-cart4 text-black" style="font-size: 25px;"></i>
-          </a>
-          <ng-container *ngIf="cartListLength>0">
-            <span class="badge text-bg-danger">{{cartListLength}}</span></ng-container>
+        <li class="nav-item d-flex">
+          <div class="ms-2 me-3">
+            <a [routerLink]="'WishList'" class="text-decoration-none text-black"><strong class="me-2">Wishlist</strong>
+              <img src="../../../assets/heart.png" width="40px" height="35px" alt="">
+            </a>
+          </div>
+          <div class="">
+            <div class="flex-shrink-0 dropdown">
+              <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img [src]="loggedInuser.image" alt="mdo" width="32" height="32" class="rounded-circle">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-lg-end text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" (click)="logOut()">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-          (input)="searchFun($event)">
-      </form>
-      <div class="ms-2">
-        <a [routerLink]="'WishList'" class="text-decoration-none text-black"><strong>Wishlist</strong> <img
-            src="../../../assets/wishlist.png" width="40px" height="35px" alt=""></a>
-        <ng-container *ngIf="wishlistLength>0">
-          <span class="badge text-bg-danger">{{wishlistLength}}</span></ng-container>
-      </div>
-      <div class="flex-shrink-0 dropdown px-3">
-        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-        </a>
-        <ul class="dropdown-menu dropdown-menu-lg-end text-small shadow" aria-labelledby="dropdownUser2">
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
-      </div>
     </div>
   </div>
 </nav>

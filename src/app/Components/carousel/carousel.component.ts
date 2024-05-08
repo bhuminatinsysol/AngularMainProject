@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class CarouselComponent {
 
+  @Output() carouselBtnClick:EventEmitter<string> = new EventEmitter<string>();
+
+  btnClick(st:string): void {
+    this.carouselBtnClick.emit(st);
+  }
 }

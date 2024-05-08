@@ -1,25 +1,25 @@
-<div class="row p-0 row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 min-vh-100 position-relative overflow-hidden">
-  <div class="col p-4 p-sm-3 p-md-3 p-lg-5 d-flex position-relative flex-column align-items-center justify-content-center mainLogin">
-    <div class="p-4  bg-light-subtle border border-1 rounded-5 d-flex flex-column gap-2 ">
-      <h1>Great to see you again.</h1>
-      <form class="p-sm-5 d-flex w-100 flex-column align-items-center position-relative">
+<div class="row row-cols-1 row-cols-md-2 min-vh-100 w-100 mx-0">
+  <div class="col p-4 p-sm-3 p-md-3 p-lg-5 d-flex flex-column align-items-center justify-content-center mainLogin">
+    <div class="p-4 bg-light-subtle border border-1 rounded-5 d-flex flex-column gap-2 shadow">
+      <h1 style="font-size: 40px;">Great to see you again <span style="color:blue; font-size: 100px; line-height: 40px;">.</span></h1>
+      <form class="p-sm-5 d-flex w-100 flex-column align-items-center position-relative" (ngSubmit)="login(myForm)" #myForm="ngForm">
         <div class="w-100 p-2">
-          <label class="form-label h4" for="">Email Id</label>
-          <input type="email" class="form-control ">
+          <label class="form-label h4" for="">Username</label>
+          <input type="text" class="form-control " name="username" ngModel>
         </div>
         <div class="w-100 p-2">
           <label class="form-label h4" for="">Password</label>
-          <input type="email" class="form-control">
+          <input type="password" class="form-control" name="password" ngModel>
         </div>
-        <div>
-          <button class="btn btn-primary">Login</button>
+        <div class="p-2">
+          <button class="btn btn-primary" type="submit">Login</button>
         </div>
       </form>
       <h5>Don't have an account? <a [routerLink]="'/signup'"> Sign Up</a></h5>
     </div>
   </div>
-  <div class="col p-0 d-none d-md-block">
-    <div class="vh-100 overflow-hidden position-relative mnt">
+  <div class="col p-0 m-0 d-none d-md-flex">
+    <div class="vh-100 w-100 overflow-hidden position-relative mnt">
       <img src="assets/mountain.jpg" alt="mountain">
     </div>
   </div>

@@ -1,8 +1,8 @@
-<div class="row p-0 row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 min-vh-100 position-relative overflow-hidden">
+<div class="row p-0 mx-0 row-cols-1 row-cols-md-2 min-vh-100 position-relative overflow-hidden">
   <div
     class="col p-4 p-sm-3 p-md-3 p-lg-5 d-flex position-relative flex-column align-items-center justify-content-center mainLogin">
-    <div class="p-4  bg-light-subtle border border-1 rounded-5 d-flex flex-column gap-2 ">
-      <h1>Create New Account<span style="color:blue; font-size: 100px; line-height: 30px;">.</span></h1>
+    <div class="p-4  bg-light-subtle border border-1 rounded-5 d-flex flex-column gap-2 shadow">
+      <h1 style="font-size: 40px;">Create New Account<span style="color:blue; font-size: 100px; line-height: 40px;">.</span></h1>
       <form class="p-sm-5 d-flex w-100 flex-column align-items-center position-relative">
         <div class="w-100 d-flex gap-3 p-2">
           <div class="w-50">
@@ -10,9 +10,9 @@
             <input type="email" class="form-control ">
           </div>
           <div class="w-50">
-          <label class="form-label h4" for="">Last Name</label>
-          <input type="email" class="form-control">
-        </div>
+            <label class="form-label h4" for="">Last Name</label>
+            <input type="email" class="form-control">
+          </div>
         </div>
         <div class="w-100 p-2">
           <label class="form-label h4" for="">Email Id</label>
@@ -22,8 +22,8 @@
           <label class="form-label h4" for="">Password</label>
           <input type="email" class="form-control">
         </div>
-        <div>
-          <button class="btn btn-primary">Login</button>
+        <div class="p-2">
+          <button class="btn btn-primary">Sign Up</button>
         </div>
       </form>
       <h5>Already have an account? <a [routerLink]="'/login'"> Login</a></h5>

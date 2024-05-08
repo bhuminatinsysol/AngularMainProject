@@ -1,78 +1,79 @@
-<div>
-  <app-carousel></app-carousel>
+<div *ngFor="let alert of alerts" class="position-fixed start-50 translate-middle z-3" style="top:100px;">
+  <alert type="md-color" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{ alert.msg }}</alert>
 </div>
 
+<div>
+  <app-carousel (carouselBtnClick)="filter($event)"></app-carousel>
+</div>
 
-<div class="card-top container-fluid pt-5 mt-3">
-  <div class="d-flex">
-    <div class="d-flex justify-content-start gap-3 flex-wrap align-items-center p-5">
-      <div class="d-flex flex-column align-self-start justify-content-center">
-        <h5>Category</h5>
-        <div>
-          <h6 (click)="AllCategory()" class="text-nowrap">All Categories</h6>
-          <ng-container *ngFor="let category of productCategories">
-          <h6 (click)="filter(category)" class="text-nowrap">{{category}}</h6>
-          </ng-container>
-        </div>
-      </div>
-    </div>
+<div class="d-flex w-100 justify-content-end pe-5 pt-5 bg-light">
+  <form class="d-inline-block position-relative rounded-5">
+    <input class="form-control rounded-5" type="search" placeholder="Search" aria-label="Search"
+      (input)="searchFun($event)">
+    <button class="btn btn-dark position-absolute top-50 start-100 translate-middle py-1 rounded-5 "><i
+        class="bi bi-search"></i></button>
+  </form>
+</div>
 
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <ng-container *ngFor="let i of productList | filterProducts:filterText">
-            <div class="col">
-              <div class="card shadow-sm">
-                <div class="p-3">
-                  <img src="{{i.thumbnail}}" alt="" width="100%" height="200px">
+<div class="card-top container-fluid bg-light p-0 m-0">
+  <div class="d-flex" id="mainAlbum">
+    <app-category-menu class="d-none d-md-flex cat-menu" [productCategories]="productCategories" (AllCatEvent)="AllCategory()"
+      (filterEvent)="filter($event)"></app-category-menu>
+    <div class="py-5 d-flex album-size">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 p-0 m-0 w-100">
+        <ng-container *ngFor="let i of productList | filterProducts:filterText">
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="p-3">
+                <img src="{{i.thumbnail}}" alt="" width="100%" height="200px">
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="prod_heading">{{i.title | titlecase}}</h5>
+                  <i class="fa fa-heart" [ngStyle]="checkWishList(i.id)? {color:'red'}: {color:''}"
+                    (click)="addOrRemoveWishList(i.id)"></i>
                 </div>
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="prod_heading">{{i.title | titlecase}}</h5>
-                    <i class="fa fa-heart" [ngStyle]="checkWishList(i.id)? {color:'red'}: {color:''}"
-                      (click)="addOrRemoveWishList(i.id)"></i>
+                <p class="card-text">{{i.description}}</p>
+                <div>
+                  <span class="heading">User Rating :</span>
+                  <span class="fa fa-star" [ngClass]="i.rating>0?'checked':''"></span>
+                  <span class="fa fa-star" [ngClass]="i.rating>1?'checked':''"></span>
+                  <span class="fa fa-star" [ngClass]="i.rating>2?'checked':''"></span>
+                  <span class="fa fa-star" [ngClass]="i.rating>3?'checked':''"></span>
+                  <span class="fa fa-star" [ngClass]="i.rating>4.5?'checked':''"></span>
+                  <p>{{i.rating}} average</p>
+                </div>
+                <div>
+                  <h5 class="fw-bold">{{i.price | currency:'USD'}}</h5>
+                </div>
+                <div class="pt-2 d-flex justify-content-between align-items-center">
+                  <div class="d-flex gap-2">
+                    <button type="button" class="btn px-4 rounded-5 btn-outline-dark"
+                      (click)="BuyProduct(i)">Buy</button>
+                    <button type="button" class="btn px-4 rounded-5 btn-dark" (click)="ShowProduct(i)">Details</button>
                   </div>
-                  <p class="card-text">{{i.description}}</p>
-                  <div>
-                    <span class="heading">User Rating :</span>
-                    <span class="fa fa-star" [ngClass]="i.rating>0?'checked':''"></span>
-                    <span class="fa fa-star" [ngClass]="i.rating>1?'checked':''"></span>
-                    <span class="fa fa-star" [ngClass]="i.rating>2?'checked':''"></span>
-                    <span class="fa fa-star" [ngClass]="i.rating>3?'checked':''"></span>
-                    <span class="fa fa-star" [ngClass]="i.rating>4.5?'checked':''"></span>
-                    <p>{{i.rating}} average</p>
-                  </div>
-                  <div>
-                    <h5 class="fw-bold">{{i.price | currency:'USD'}}</h5>
-                  </div>
-                  <div class="pt-2 d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-primary" (click)="BuyProduct(i)">Buy</button>
-                      <button type="button" class="btn btn-sm btn-outline-success"
-                        (click)="ShowProduct(i)">Details</button>
-                    </div>
-                    <small class="text-muted">Stock: {{i.stock}}</small>
-                  </div>
+                  <small class="text-muted">Stock: {{i.stock}}</small>
                 </div>
               </div>
             </div>
-          </ng-container>
-        </div>
+          </div>
+        </ng-container>
       </div>
+
     </div>
   </div>
 
-  <div class="d-flex justify-content-center p-5">
+  <div class="d-flex justify-content-center w-100 p-5 overflow-scroll">
     <ul class="pagination">
       <li class="page-item" [ngClass]="skipValue==0?'disabled':''">
-        <button class="page-link" (click)="SkipValueUpdate()">Previous</button>
+        <button class="page-link text-black" (click)="SkipValueUpdate()">Previous</button>
       </li>
       <ng-container *ngFor="let e of paginationArray; let i = index;">
-        <li class="page-item"><a class="page-link" [ngClass]="skipValue == e? 'active':''"
+        <li class="page-item"><a class="page-link text-black" [ngClass]="skipValue == e? 'active':''"
             (click)="openpage(e)">{{i+1}}</a></li>
       </ng-container>
       <li class="page-item " [ngClass]="skipValue==actualLength-10 || actualLength < 10 ?'disabled':''">
-        <button class="page-link" (click)="limitValueUpdate()">Next</button>
+        <button class="page-link text-black" (click)="limitValueUpdate()">Next</button>
       </li>
     </ul>
   </div>

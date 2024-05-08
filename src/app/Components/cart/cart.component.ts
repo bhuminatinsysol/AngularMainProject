@@ -17,7 +17,6 @@ export class CartComponent {
   ngOnInit() {
     this.cartObs= this.cart.productObs.subscribe((product: any) => {
       this.cartList=product;
-      console.log("Cart list:- ",this.cartList);
     });
   }
 
@@ -42,8 +41,6 @@ export class CartComponent {
   }
 
   ngOnDestroy(): void {
-    console.log("Cart destroyed");
     this.cartObs.unsubscribe();
-    console.log("observabel unsubscribed successfully....");
   }
 }

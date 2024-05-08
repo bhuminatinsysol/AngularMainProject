@@ -3,7 +3,7 @@
     position: absolute;
     content: "";
     top:200px;
-    right:250px;
+    right:270px;
     width: 1000px;
     height: 500px;
     transform: rotate(100deg);
@@ -20,9 +20,12 @@
 h1{
   font-size: 60px;
   text-align: start;
-  font-style: 'Arial';
+  font-family: "Josefin Sans";
 }
 
+label, h5{
+  font-family: 'Archivo';
+}
 
 .mainLogin{
   background-color: #F2F2F2;

@@ -1,0 +1,26 @@
+input{
+  height: 40px;
+  width: 300px;
+}
+
+button.btn{
+  width: 150px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid white;
+  font-size: 26px;
+  font-weight: 600;
+  padding: 0px;
+}
+
+button.btn:hover{
+  background-color: black;
+  color: white;
+}
+
+.link-dark{
+    img{
+      width: 35px;
+      height: 35px;
+    }
+}

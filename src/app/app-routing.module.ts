@@ -8,6 +8,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { HomeComponent } from './Components/home/home.component';
 import { ProfileComponent } from './Components/profile/profile.component';
+import { loginGuardGuard } from './Guards/login-guard.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
   {
     path:'home',
     component: HomeComponent,
+    canActivate:[loginGuardGuard],
     children:[
       {
         path:'',

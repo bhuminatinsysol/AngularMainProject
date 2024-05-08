@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/header/header.component';
@@ -18,6 +17,10 @@ import { SignupComponent } from './Components/signup/signup.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { HomeComponent } from './Components/home/home.component';
 import { CarouselComponent } from './Components/carousel/carousel.component';
+import { CategoryMenuComponent } from './Components/category-menu/category-menu.component';
+import { AlertModule } from "ngx-bootstrap/alert";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,14 +35,17 @@ import { CarouselComponent } from './Components/carousel/carousel.component';
     SignupComponent,
     ProfileComponent,
     HomeComponent,
-    CarouselComponent
+    CarouselComponent,
+    CategoryMenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AlertModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
